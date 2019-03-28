@@ -7,6 +7,10 @@
 #include "mmu.h"
 #include "proc.h"
 
+// definition of extern int readcount
+extern int readcount;
+int testcount = 0;
+
 int
 sys_fork(void)
 {
@@ -89,3 +93,17 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+int
+sys_wcupa(void)
+{
+  testcount++;
+  return testcount;
+}
+
+int
+sys_getreadcount(void)
+{
+  return readcount;
+}
+

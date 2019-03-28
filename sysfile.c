@@ -18,6 +18,8 @@
 
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
+int readcount = 0;
+
 static int
 argfd(int n, int *pfd, struct file **pf)
 {
@@ -72,6 +74,7 @@ sys_read(void)
   struct file *f;
   int n;
   char *p;
+  readcount++;
 
   if(argfd(0, 0, &f) < 0 || argint(2, &n) < 0 || argptr(1, &p, n) < 0)
     return -1;
